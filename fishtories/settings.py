@@ -2,6 +2,16 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
+AWS_ACCESS_KEY_ID = 'AKIA4RD6W6S7FEGBYFUH'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'fishtories'
+AWS_S3_SIGNATURE_NAME = 's3v4',
+AWS_S3_REGION_NAME = 'us-east-1'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL =  None
+AWS_S3_VERITY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -124,9 +134,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+# ]
+
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 MEDIA_URL = 'media/'
