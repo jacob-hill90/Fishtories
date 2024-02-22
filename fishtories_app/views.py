@@ -10,9 +10,14 @@ from .models import AppUser, FishDB, CatchData
 
 ######################---INITIAL--VIEW---#######################
 
+# def home_page(request):
+#     theIndex = open('static/index.html').read()
+#     return HttpResponse(theIndex)
+
 def home_page(request):
-    theIndex = open('static/index.html').read()
-    return HttpResponse(theIndex)
+    s3_url = 'https://fishtories.s3.amazonaws.com/static/index.html'
+    response = requests.get(s3_url)
+    return HttpResponse(response.content)
 
 
 ######################---FISH--DB---#######################
@@ -112,6 +117,7 @@ def username_validate(request):
 def who_am_i(request):
     if request.user.is_authenticated:
         data = serializers.serialize("json", [request.user], fields=['id', 'email', 'username', 'first_name', 'last_name', 'zipcode', 'state', 'profile_picture'])
+        print(data)
         return HttpResponse(data)
     else:
         return JsonResponse({'user': None})
